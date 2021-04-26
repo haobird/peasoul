@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+    mock:
+        # image: registry.cn-hangzhou.aliyuncs.com/city-cloud/iot-lite:master
+        build: .
+        container_name: mock
+        restart: always
+        # volumes:
+        #     - ./:/www
+        # command: go run main.go
