@@ -24,26 +24,29 @@ func info(v interface{}) error {
 
 func main() {
 	// 处理包
-	pea := peajob.New(2, info)
+	pea := peajob.New(2).SetHandler(info)
 	pea.SetCallback(func(err error, data interface{}) {
 		fmt.Println("回调的执行", err, data)
 	})
 	// pea.Process(print)
 	// pea.Run(1)
 	// pea.Run(2)
+	// pea.Run(3)
+	// pea.Run(4)
 	i := 1
+	j := 2
 
 	go func() {
 		for {
-			pea.Run(i)
-			i++
-			time.Sleep(3 * time.Second)
+			pea.RunWithTag(i, "test")
+			i = i + 2
+			time.Sleep(2 * time.Second)
 		}
 	}()
 
 	for {
-		pea.Run(i)
-		i++
+		pea.RunWithTag(j, "test")
+		j = j + 2
 		time.Sleep(3 * time.Second)
 	}
 
